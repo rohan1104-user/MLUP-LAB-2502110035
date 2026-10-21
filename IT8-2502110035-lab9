@@ -1,0 +1,63 @@
+import re
+
+# OLD VERSION (split parsing) — kept for comparison
+# parts = [x.strip() for x in line.strip().split(",")]
+# wo = parts[0]
+# emp = parts[1].split(":", 1)[1].strip()
+# shift = parts[2].split(":", 1)[1].strip()
+# hours = float(parts[3].split(":", 1)[1].strip())
+# Note: The regex version survived more spacing variations in testing.
+
+# NEW VERSION: regex parsing
+pattern = re.compile(
+    r"^\s*(WO\d{2})\s*,\s*Employee:\s*(.*?)\s*,"
+    r"\s*Shift:\s*(Morning|Evening|Night)\s*,"
+    r"\s*Hours:\s*(\d+(?:\.\d+)?)\s*$"
+)
+
+def parse_record(line):
+    match = pattern.fullmatch(line)
+    if not match:
+        raise ValueError("Invalid record format")
+
+    wo, emp, shift, hours = match.groups()
+
+    if not emp:
+        raise ValueError("Missing employee name")
+
+    hours = float(hours)
+    if not 0 < hours <= 24:
+        raise ValueError("Invalid hours")
+
+    return wo, emp, shift, hours
+
+
+# Test
+with open("data/shift_log.txt", encoding="utf-8") as f:
+    lines = f.readlines()
+
+valid = []
+rejects = []
+
+for n, line in enumerate(lines, 1):
+    try:
+        valid.append(parse_record(line))
+    except ValueError as e:
+        rejects.append((n, line.strip(), str(e)))
+
+print("Total lines:", len(lines))
+print("Accepted:", len(valid))
+print("Rejected:", len(rejects))
+
+with open("data/rejects.csv", "w", encoding="utf-8") as f:
+    f.write("Line,Rejected Record,Reason\n")
+    for n, line, reason in rejects:
+        f.write(f'{n},"{line}","{reason}"\n')
+
+with open("data/report.txt", "w", encoding="utf-8") as f:
+    f.write(f"{'Part Code':<12}{'Employee':<20}{'Shift':<12}{'Hours':>6}\n")
+    f.write("-" * 50 + "\n")
+    for wo, emp, shift, hours in valid:
+        f.write(f"{wo:<12}{emp:<20}{shift:<12}{hours:>6.2f}\n")
+
+print("Report and rejects files created.")

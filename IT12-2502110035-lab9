@@ -1,0 +1,40 @@
+import os
+
+# Create the data directory if it doesn't exist
+os.makedirs("data", exist_ok=True)
+
+# Create 15 shift log records, including 3 deliberately faulty records
+records = [
+    "WO01,Employee: Rahul,Shift: Morning,Hours: 8",
+    "WO02,Employee: Amit,Shift: Evening,Hours: 7",
+    "WO03,Employee: Priya,Shift: Night,Hours: 8",
+    "WO04,Employee: Neha,Shift: Morning,Hours: 6",
+    "WO05,Employee: Ravi,Shift: Evening,Hours: 8",
+    "WO06,Employee: Sita,Shift: Night,Hours: 7",
+    "WO07,Employee: Karan,Shift: Morning,Hours: 8",
+
+    # Three deliberately filthy (invalid) records
+    "WO08,Employee: ,Shift: Morning,Hours: 8",       # Missing employee
+    "WO09,Employee: Aman,Shift: Unknown,Hours: -5",  # Invalid shift and hours
+    "WO10,Employee: Riya,Shift: Night,Hours: abc",   # Non-numeric hours
+
+    "WO11,Employee: Arjun,Shift: Morning,Hours: 8",
+    "WO12,Employee: Meena,Shift: Evening,Hours: 6",
+    "WO13,Employee: Dev,Shift: Night,Hours: 7",
+    "WO14,Employee: Pooja,Shift: Morning,Hours: 8",
+    "WO15,Employee: Sanjay,Shift: Evening,Hours: 5"
+]
+
+# Write records to the file
+with open("data/shift_log.txt", "w", encoding="utf-8") as file:
+    for record in records:
+        file.write(record + "\n")
+
+# Read the file back and count the lines
+with open("data/shift_log.txt", "r", encoding="utf-8") as file:
+    lines = file.readlines()
+
+print("Contents of shift_log.txt:")
+print("".join(lines))
+
+print("Total line count:", len(lines))
