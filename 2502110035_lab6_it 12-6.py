@@ -127,7 +127,7 @@ print("Lookup P999:", lookup(catalogue, "P999"))
 
 print("Scrap codes:", scrap_codes(catalogue))
 
-it 8-
+it 6-
 
 def inspect(dia):
     if dia < 10:
