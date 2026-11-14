@@ -111,3 +111,19 @@ except PermissionError:
 
 except OSError as error:
     print("File error:", error)
+
+it 8-
+
+git add .
+git commit -m "Final project release"
+git tag -a v1.0 -m "Version 1.0"
+git push origin main
+git push origin v1.0
+
+output-
+Final commit created successfully.
+Version tag v1.0 created successfully.
+Project pushed to GitHub.
+Release v1.0 published successfully.
+
+Result: Project successfully published.
