@@ -1,4 +1,4 @@
-
+it 12-
 class Machine:
     def __init__(self, name, model, limit):
         self.name = name
