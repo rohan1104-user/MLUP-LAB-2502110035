@@ -30,3 +30,14 @@ print("Scrap Parts    :", scrap)
 print("Full Boxes     :", boxes)
 print("Loose Parts    :", loose)
 print("Audit:", boxes, "*", box_size, "+", loose, "==", accept, "->", boxes * box_size + loose == accept)
+
+it-8 
+total = int(input("Enter total parts: "))
+size = int(input("Enter box size: "))
+
+boxes = total // size
+loose = total % size
+
+print("Full boxes =", boxes)
+print("Loose parts =", loose)
+print("Audit:", boxes, "*", size, "+", loose, "==", total, "->", boxes * size + loose == total)
