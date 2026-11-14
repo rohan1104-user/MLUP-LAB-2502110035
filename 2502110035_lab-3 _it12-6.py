@@ -61,3 +61,8 @@ for i in range(10):
         scrap += 1
 
 print("Final Report: ACCEPT =", accept, ", REWORK =", rework, ", SCRAP =", scrap)
+
+it-12
+name=input("operator name:")
+print("hello",name)
+
