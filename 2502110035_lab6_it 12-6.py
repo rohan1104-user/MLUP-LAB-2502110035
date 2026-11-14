@@ -1,5 +1,5 @@
 
-# IT12 Rough cut · Three Jigs warm-up
+it 12- 
 
 # 1. inspect(dia) → bin label
 def inspect(dia):
