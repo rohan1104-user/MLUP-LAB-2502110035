@@ -1,3 +1,4 @@
+it 6-
 accept = 0
 rework = 0
 scrap = 0
