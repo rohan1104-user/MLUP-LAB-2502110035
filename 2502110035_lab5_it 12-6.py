@@ -1,4 +1,5 @@
-# Raw bench line
+it 12-
+#Raw bench line
 line = "P123 25.4 3.5"
 
 # Extract the fields
